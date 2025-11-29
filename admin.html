@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin-page</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <nav>
+        <div>
+            <select id="filter_category"> 
+                <option value="">All Catagory</option>
+                <option value="auto">Auto</option>
+                <option value="car">Car</option>
+                <option value="bus">Bus</option>
+            </select>
+
+            <select name="availability" id="filter_availability">
+                <option value="">All Availability</option>
+                <option value="available">Available</option>
+                <option value="unavailable">Unavailable</option>
+            </select>
+            <button id="clearFilter">Clear Filter</button>
+        </div>
+    </nav>
+     <h3>Add Fleet</h3>
+    <div id="fleet_content">
+       
+        <input type="text" id="regis_num" placeholder="Reg No of Vehicle">
+         <select name="category" id="categoryy">
+            <option value="">All Catagory</option>
+            <option value="auto">Auto</option>
+            <option value="car">Car</option>
+            <option value="bus">Bus</option>
+        </select>
+        <input type="text" id="driver_name" placeholder="Driver Name">
+        <select name="availability" id="availability_add">
+            <option value="">All Availability</option>
+            <option value="available">Available</option>
+            <option value="unavailable">Unavailable</option>
+        </select>
+        <button id="addFleet">Add Fleet</button>
+    </div>
+    <main>
+        <div id="card"></div>
+    </main>
+</body>
+<script>
+    let vehicles = []
+    const regNum = document.getElementById("regis_num")
+    const category = document.getElementById("categoryy")
+    const driver_name = document.getElementById("driver_name")
+    const availability = document.getElementById("availabilty")
+    const addNew = document.getElementById("addFleet")
+    
+
+    addNew.addEventListener("click", ()=>{
+        if (!regNum.value || !category.value || !driverName.value || !availability.value) {
+            alert("Please enter all fields!");
+            return;
+        }
+        
+        vehicles.push({
+            reg : regNum.value,
+            category : category.value,
+            driver : druver.value,
+            availability : availability.value
+        })
+        renderAll()
+        regNum.value = ""
+        category.value = ""
+        driver_name.value = ""
+        availability.value = ""
+
+    })
+
+
+     function renderAll() {
+        cardDiv.innerHTML = "";
+        vehicles.forEach((item, index), ()=> {
+            const box = document.createElement("div");
+            box.className = "box";
+            box.innerHTML = `
+                <img src="https://coding-platform.s3.amazonaws.com/dev/lms/tickets/5e80fcb6-3f8e-480c-945b-30a5359eb40e/JNmYjkVr3WOjsrbu.png" width="180">
+                <h3>Reg No: ${item.reg}</h3>
+                <h3>Category: ${item.category}</h3>
+                <h3>Driver: ${item.driver}</h3>
+                <h3>Status: ${item.status}</h3>
+                <button onclick="update_driver(${index})">Update Driver</button>
+                <button onclick="deleteVehicle(${index})">Delete</button>
+            `;
+            cardDiv.appendChild(box);
+            console.log(box.innerHTML)
+        });
+    }
+    function change_availability(){
+        const status_ava = document.getElementById
+    }
+    function update_driver(index){
+        const newName = prompt("Enter New Name: ")
+        if(newNme){
+            vehicles[index].driver = newName;
+        }
+    }
+    function deleteVehicle(index) {
+        vehicles.splice(index, 1);
+        renderAll();
+    }
+    function update_driver(index) {
+        const newName = prompt("Enter new driver name:");
+        if (newName) {
+            vehicles[index].driver = newName;
+            renderAll();
+        }
+    }
+</script>
+</html>
